@@ -14,11 +14,52 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from QRcodeStock.views import home
+from django.urls import path, include
+from QRcodeStock.views import home, login, \
+    list_products, show_product, add_product, edit_product, \
+    list_categories, show_category, add_category, edit_category, \
+    list_shelves, show_shelf, add_shelf, edit_shelf, \
+    list_lots, show_lot, add_lot, edit_lot, \
+    list_users, show_user, add_user, edit_user
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', home, name='home_url'),
-
+    path('', home, name='url_home'),
+    path('login/', login, name='url_login'),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
+
+# urls de produto
+urlpatterns += [
+    path('products/', list_products, name='url_list_products'),
+    path('product/<int:id>', show_product, name='url_show_product'),
+    path('add_product/', add_product, name='url_add_product'),
+    path('edit_product/<int:id>', edit_product, name='url_edit_product')
+]
+
+# urls de categoria
+urlpatterns += [
+    path('categories/', list_categories, name='url_list_categories'),
+    path('category/<int:id>', show_category, name='url_show_category'),
+    path('add_category/', add_category, name='url_add_category'),
+    path('edit_category/<int:id>', edit_category, name='url_edit_category'),
+]
+
+# urls de estante
+urlpatterns += [
+    path('shelves/', list_shelves, name='url_list_shelves'),
+    path('shelf/<int:id>', show_shelf, name='url_show_shelf'),
+    path('add_shelf/', add_shelf, name='url_add_shelf'),
+    path('edit_shelf/<int:id>', edit_shelf, name='url_edit_shelf'),
+]
+"""
+# urls de lote
+urlpatterns += [
+    path()
+]
+
+# urls de usuario
+urlpatterns += [
+    path()
+]
+"""
