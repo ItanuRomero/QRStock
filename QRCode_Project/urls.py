@@ -20,13 +20,15 @@ from QRcodeStock.views import home, login, \
     list_categories, show_category, add_category, edit_category, \
     list_shelves, show_shelf, add_shelf, edit_shelf, \
     list_lots, show_lot, add_lot, edit_lot, \
-    list_users, show_user, add_user, edit_user
+    list_users, show_user, add_user, edit_user, \
+    Register
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='url_home'),
     path('login/', login, name='url_login'),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('sign_in/', Register.as_view(), name='url_register'),
 ]
 
 # urls de produto
@@ -34,7 +36,7 @@ urlpatterns += [
     path('products/', list_products, name='url_list_products'),
     path('product/<int:id>', show_product, name='url_show_product'),
     path('add_product/', add_product, name='url_add_product'),
-    path('edit_product/<int:id>', edit_product, name='url_edit_product')
+    path('edit_product/<int:id>', edit_product, name='url_edit_product'),
 ]
 
 # urls de categoria
@@ -52,14 +54,19 @@ urlpatterns += [
     path('add_shelf/', add_shelf, name='url_add_shelf'),
     path('edit_shelf/<int:id>', edit_shelf, name='url_edit_shelf'),
 ]
-"""
+
 # urls de lote
 urlpatterns += [
-    path()
+    path('lots/', list_lots, name='url_list_lots'),
+    path('lot/<int:id>', show_lot, name='url_show_lot'),
+    path('add_lot/', add_lot, name='url_add_lot'),
+    path('edit_lot/<int:id>', edit_lot, name='url_edit_lot'),
 ]
 
 # urls de usuario
 urlpatterns += [
-    path()
+    path('users/', list_users, name='url_list_users'),
+    path('user/<int:id>', show_user, name='url_show_user'),
+    path('add_user/', add_user, name='url_add_user'),
+    path('edit_user/<int:id>', edit_user, name='url_edit_user'),
 ]
-"""
