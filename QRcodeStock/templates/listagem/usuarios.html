@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  
+  <div class="container-md" style="margin: 56px auto 32px; padding: 0 32px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Usuários</h1>
+      </div>
+    </div>
+
+    <form method="post" class="row" style="margin-top: 16px;">
+        {% csrf_token %}
+      <div class="col-md-4">
+        <label for="pesquisa" class="form-label">Pesquisar usuário</label>
+        <input type="text" class="form-control" id="pesquisa" name="filter"
+               placeholder="Digite o nome do usuário">
+      </div>
+
+      <div class="col-md-4 d-flex align-items-end">
+        <button 
+          type="submit" 
+          class="btn btn-success" 
+          id="pesquisar-produto"
+        >
+          Pesquisar
+        </button>
+      </div>
+    </form>
+      
+
+      
+
+    <div class="row" style="margin-top: 32px;">
+      <table class="table table-striped">
+        <thead>
+          <th>Nome do usuário</th>
+          <th>CPF</th>
+          <th>Tipo</th>
+          <th></th>
+        </thead>
+
+        <tbody>
+
+          {% for user in users %}
+              <tr>
+                <td>{{ user.nome }}</td>
+                <td>{{ user.cpf }}</td>
+                  {% if user.tipo == 'OP' %}
+                      <td>Operador</td>
+                  {% elif user.tipo == 'GER' %}
+                      <td>Gerente</td>
+                  {% else %}
+                      <td>Desconhecido</td>
+                  {% endif %}
+                <td>
+                  <a href="{% url 'url_show_user' user.id %}" class="btn btn-primary btn-sm">
+                    Visualizar <i style="font-size: 12px;" data-feather="eye"></i>
+                  </a>
+                </td>
+              </tr>
+         {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    feather.replace()
+  </script>
+
+{% endblock %}

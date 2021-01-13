@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-Br">
-<head>
-    <meta charset="UTF-8">
-    <title>QRStock - Organize seu estoque!</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-    <div class="header">
-        <button class="saiba-mais">Saiba mais</button>
-
-        <button class="sign-in">Entrar</button>
-
-        <button class="sign-up">Criar conta</button>
-    </div>
+{% block conteudo %}
 
     <h1>QRStock</h1>
     <h2>Organize your stock in a inteligent way with quick response.</h2>
 
     <div class="logo">
-        <img src="" alt="Logo">
+        <img src="{% static '' %}" alt="Logo">
     </div>
 
-</body>
-</html>
+{% endblock %}

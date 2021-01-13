@@ -2,21 +2,117 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!--
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    -->
+
+    {% block style %}
+    
+    {% endblock %}
+    
     <title>{% block titulo %}
         {{ titulo }}
     {% endblock %}</title>
 </head>
 <body>
     <div>
-    <!-- Aqui estarao as paginas -->
-        
-    <!-- aqui fica o usuario -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">QRStock</a>
+
+              <button class="navbar-toggler" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#navbarNav"
+                      aria-controls="navbarNav"
+                      aria-expanded="false"
+                      aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link
+                        {% if 'lote' in titulo %}
+                        active
+                        {% endif %}"
+                       href="/lots/">Lotes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link
+                        {% if 'produto' in titulo %}
+                        active
+                        {% endif %}" href="/products/">Produtos</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link
+                        {% if 'categoria' in titulo %}
+                        active
+                        {% endif %}" href="/categories/">Categorias</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link
+                        {% if 'estante' in titulo %}
+                        active
+                        {% endif %}" href="/shelves/">Estantes</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link
+                        {% if 'usu' in titulo %}
+                        active
+                        {% endif %}" href="/users/">Usuários</a>
+                  </li>
+                </ul>
+              </div>
+                    <div style="display: flex;  justify-content: flex-end; align-items: center; width: 100%;">
+
+                    {% if user.get_username %}
+                        <span style="color: #fff;">
+                        {{ user.get_username }}
+                        </span>
+                        <a href="/accounts/logout">
+                        <button class="btn btn-danger"
+                                type="button"
+                                style="margin-left: 8px;">Sair</button>
+                        </a>
+                    {% else %}
+                        <span style="color: #fff;">
+                        Desconhecido
+                        </span>
+                        <a href="/accounts/login">
+                        <button class="btn btn-secondary"
+                                type="button">Log in</button>
+                        </a>
+                        &nbsp;
+                        <a href="/accounts/register">
+                        <button class="btn btn-primary"
+                                type="button">Criar conta</button>
+                        </a>
+                    {% endif %}
+
+              </div>
+            </div>
+          </nav>
+
     </div>
 
     {% block conteudo %}
     
     {% endblock %}
 
-    <script src=""></script>
+    <!-- FEATHER ICONS -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
 </body>
 </html>

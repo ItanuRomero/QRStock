@@ -8,6 +8,7 @@ class FormUsuario(ModelForm):
         fields = '__all__'
 
 
+
 class FormProduto(ModelForm):
     class Meta:
         model = Produto

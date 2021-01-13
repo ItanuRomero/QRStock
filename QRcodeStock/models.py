@@ -4,7 +4,6 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-
 class Usuario(models.Model):
     class TipoDeUsuario(models.TextChoices):
         OPERADOR = 'OP', _('Operador')

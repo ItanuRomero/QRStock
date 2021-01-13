@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+    <div class="container-md" style="margin: 56px auto 32px; padding: 0 32px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Lotes</h1>
+      </div>
+    </div>
+
+    <form method="post" class="row" style="margin-top: 16px;">
+        {% csrf_token %}
+      <div class="col-md-4">
+        <label for="pesquisa" class="form-label">Pesquisar produto</label>
+        <input type="text" class="form-control" id="pesquisa" name="filter"
+               placeholder="Digite o nome ou código">
+      </div>
+
+      <div class="col-md-4">
+        <label for="categoria" class="form-label">Pesquisar por categoria</label>
+        <select class="form-select" id="categoria">
+          <option selected>Selecione uma categoria</option>
+          <option value="1">Categoria 01</option>
+          <option value="2">Categoria 02</option>
+          <option value="3">Categoria 03</option>
+        </select>
+      </div>
+
+      <div class="col-md-4 d-flex align-items-end">
+        <button
+          type="submit"
+          class="btn btn-success"
+          id="pesquisar-produto"
+        >
+          Pesquisar
+        </button>
+      </div>
+    </form>
+
+    <div class="row" style="margin-top: 32px;">
+      <table class="table table-striped">
+        <thead>
+          <th>Lote</th>
+          <th>Produto</th>
+          <th>Fabricação</th>
+          <th>Validade</th>
+          <th></th>
+        </thead>
+
+        <tbody>
+
+          {% for lot in lots %}
+              <tr>
+                <td>{{ lot.id }}</td>
+                <td>{{ lot.id_produto.nome }}</td>
+                <td>{{ lot.data_fabricacao }}</td>
+                  {% if lot.data_vencimento %}
+                    <td>{{ lot.data_vencimento }}</td>
+                  {% else %}
+                      <td>Não possui</td>
+                  {% endif %}
+
+                <td>
+                  <a href="{% url 'url_show_lot' lot.id %}" class="btn btn-primary btn-sm">
+                    Visualizar <i style="font-size: 12px;" data-feather="eye"></i>
+                  </a>
+                </td>
+              </tr>
+          {% endfor %}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <script>
+    feather.replace()
+  </script>
+
+{% endblock %}
