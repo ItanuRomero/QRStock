@@ -49,7 +49,8 @@ def list_products(request):
 @login_required
 def show_product(request, id):
     product = Produto.objects.get(id=id)
-    context = {'titulo': 'QRStock - Produto', 'produto': product}
+    url_qr_code = f'https://qrstock.herokuapp.com/product/{product.id}'
+    context = {'titulo': 'QRStock - Produto', 'produto': product, 'url_qr_code': url_qr_code}
     return render(request, 'show/produto.html', context)
 
 

@@ -1,13 +1,33 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load qr_code %}
 
 {% block conteudo %}
+    <div class="container" style="margin-top: 5rem">
 
-    <h1>QRStock</h1>
-    <h2>Organize your stock in a inteligent way with quick response.</h2>
-
-    <div class="logo">
-        <img src="{% static '' %}" alt="Logo">
+    <div style="display: inline;
+             width: 30%;
+             float: right;
+            margin-top: 3rem">
+            {% qr_from_text 'https://github.com/ItanuRomero/QRCode-Project' %}
     </div>
+
+        <div style="margin-top: 3rem">
+            <h1 style="
+                    font-size: 10rem;
+                    color: var(--bs-blue);
+                "
+            >QRStock</h1>
+
+            <h2 style="
+                    color: var(--bs-primary);
+                    font-size: 3rem;
+                "
+            >Organize your stock in a <br> inteligent way with quick response.</h2>
+        </div>
+
+
+
+    </div>
+
 
 {% endblock %}
