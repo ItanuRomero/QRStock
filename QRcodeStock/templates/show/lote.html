@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  <div class="container-md" style="margin: 56px auto 32px; padding: 0 32px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Visualizando Lote {{ lote.id }}</h1>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <form class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Identificador</label>
+            <input type="text" value="{{ lote.id }}"
+                   class="form-control" id="name" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="data_fabricacao" class="form-label">Data de fabricação</label>
+            <input type=""
+                   {% if lote.data_fabricacao != 'None' %}
+                   value="{{ lote.data_fabricacao }}"
+                   {% else %}
+                   value="Sem data definida"
+                   {% endif %}
+
+
+                   class="form-control" id="data_fabricacao" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="produto" class="form-label">Produto</label>
+            <input type="text" value="{{ lote.id_produto.nome }}"
+                   class="form-control" id="produto" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="data_validade" class="form-label">Data de validade</label>
+            <input type="" value="{{ lote.data_vencimento }}"
+                   class="form-control" id="data_validade" readonly required>
+          </div>
+        </div>
+        
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="obs" class="form-label">OBS</label>
+              <textarea class="form-control" style="min-height: 120px;"
+                        placeholder="Descrição da categoria" id="obs" readonly required>{{ lote.observacoes }}</textarea>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 32px;">
+          <div class="col-md-1">
+              <a href="/lots/">
+            <button type="button" class="btn btn-secondary">Voltar</button>
+                  </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_edit_lot' lote.id %}">
+            <button type="button" class="btn btn-info">Editar</button>
+                  </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_delete_lot' lote.id %}">
+              <button type="button" class="btn btn-danger">Apagar</button>
+                    </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

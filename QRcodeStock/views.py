@@ -29,14 +29,20 @@ def login(request):
 
 @login_required
 def list_products(request):
+    categories = Categoria.objects.all()
     if request.POST:
         if request.POST['filter']:
             products = Produto.objects.filter(nome=request.POST['filter'])
         else:
             products = Produto.objects.all()
+        if request.POST['category-filter']:
+            if request.POST['category-filter'] != 0:
+                products = Produto.objects.filter(id_categoria=request.POST['category-filter'])
+        else:
+            products = Produto.objects.all()
     else:
         products = Produto.objects.all()
-    context = {'titulo': 'QRStock - Lista de produtos', 'products': products}
+    context = {'titulo': 'QRStock - Lista de produtos', 'products': products, 'categories': categories}
     return render(request, 'listagem/produtos.html', context)
 
 
@@ -44,7 +50,7 @@ def list_products(request):
 def show_product(request, id):
     product = Produto.objects.get(id=id)
     context = {'titulo': 'QRStock - Produto', 'produto': product}
-    return render(request, 'QRcodeStock/', context)
+    return render(request, 'show/produto.html', context)
 
 
 @login_required
@@ -77,6 +83,17 @@ def add_product(request):
 
 
 @login_required
+def delete_product(request, id):
+    product = Produto.objects.get(id=id)
+    context = {'registro': product.nome, 'redirect': '/products/'}
+    if request.method == 'POST':
+        product.delete()
+        return redirect('url_list_products')
+    else:
+        return render(request, 'delete/confirm.html', context)
+
+
+@login_required
 def list_categories(request):
     if request.POST:
         if request.POST['filter']:
@@ -92,12 +109,12 @@ def list_categories(request):
 @login_required
 def show_category(request, id):
     category = Categoria.objects.get(id=id)
-    context = {'titulo': 'QRStock - Categoria', 'Categoria': category}
-    return render(request, 'QRcodeStock/', context)
+    context = {'titulo': 'QRStock - Categoria', 'categoria': category}
+    return render(request, 'show/categoria.html', context)
 
 
 @login_required
-def edit_category(request):
+def edit_category(request, id):
     selected_category = Categoria.objects.get(id=id)
     form = FormCategoria(request.POST or None, request.FILES or None, instance=selected_category)
     contexto = {'titulo': 'QRStock - Editar categoria', 'form': form,
@@ -126,6 +143,17 @@ def add_category(request):
 
 
 @login_required
+def delete_category(request, id):
+    category = Categoria.objects.get(id=id)
+    context = {'registro': category.nome, 'redirect': '/categories/'}
+    if request.method == 'POST':
+        category.delete()
+        return redirect('url_list_categories')
+    else:
+        return render(request, 'delete/confirm.html', context)
+
+
+@login_required
 def list_shelves(request):
     if request.POST:
         if request.POST['filter']:
@@ -142,7 +170,7 @@ def list_shelves(request):
 def show_shelf(request, id):
     shelf = Estante.objects.get(id=id)
     context = {'titulo': 'QRStock - Estante', 'shelf': shelf}
-    return render(request, 'QRcodeStock/', context)
+    return render(request, 'show/estante.html', context)
 
 
 @login_required
@@ -175,6 +203,17 @@ def add_shelf(request):
 
 
 @login_required
+def delete_shelf(request, id):
+    shelf = Estante.objects.get(id=id)
+    context = {'registro': shelf.codigo, 'redirect': '/shelves/'}
+    if request.method == 'POST':
+        shelf.delete()
+        return redirect('url_list_shelves')
+    else:
+        return render(request, 'delete/confirm.html', context)
+
+
+@login_required
 def list_lots(request):
     if request.POST:
         if request.POST['filter']:
@@ -191,7 +230,7 @@ def list_lots(request):
 def show_lot(request, id):
     lot = Lote.objects.get(id=id)
     context = {'titulo': 'QRStock - Lote', 'lote': lot}
-    return render(request, 'QRcodeStock/', context)
+    return render(request, 'show/lote.html', context)
 
 
 @login_required
@@ -224,6 +263,17 @@ def add_lot(request):
 
 
 @login_required
+def delete_lot(request, id):
+    lot = Lote.objects.get(id=id)
+    context = {'registro': lot.nome, 'redirect': '/lots/'}
+    if request.method == 'POST':
+        lot.delete()
+        return redirect('url_list_lots')
+    else:
+        return render(request, 'delete/confirm.html', context)
+
+
+@login_required
 def list_users(request):
     if request.POST:
         if request.POST['filter']:
@@ -237,10 +287,10 @@ def list_users(request):
 
 
 @login_required
-def show_user(request):
+def show_user(request, id):
     user = Usuario.objects.get(id=id)
     context = {'titulo': 'QRStock - Usuário', 'user': user}
-    return render(request, 'QRcodeStock/', context)
+    return render(request, 'show/usuario.html', context)
 
 
 def edit_user(request, id):
@@ -273,6 +323,15 @@ def add_user(request):
         # messages.success(request, "Usuário criado com sucesso!")
         return redirect('url_list_users')
     else:
-        context = {'titulo': 'QRStock - Erro',
-                    'error': 'Formulário inválido, tente novamente.'}
-        return render(request, 'error.html', context)
+        return render(request, 'edit/edit_and_create.html', context)
+
+
+@login_required
+def delete_user(request, id):
+    user = Usuario.objects.get(id=id)
+    context = {'registro': user.nome, 'redirect': '/users/'}
+    if request.method == 'POST':
+        user.delete()
+        return redirect('url_list_users')
+    else:
+        return render(request, 'delete/confirm.html', context)

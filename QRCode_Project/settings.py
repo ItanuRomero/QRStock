@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'QRcodeStock.apps.QrcodestockConfig',
     'bootstrapform',
+    'qr_code'
 ]
 
 MIDDLEWARE = [

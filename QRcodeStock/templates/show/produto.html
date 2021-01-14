@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  <div class="container-md" style="margin: 56px auto 32px; padding: 0 32px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Visualizando Produto {{ produto.id }}</h1>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top: 12px;">
+      <form class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" value="{{ produto.nome }}"
+                   class="form-control" id="name" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="price" class="form-label">Preço</label>
+            <input type="text" value="R$ {{ produto.valor_compra }}"
+                   class="form-control" id="price" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="description" class="form-label">Descrição</label>
+            <input type="text" value="{{ produto.descricao }}"
+                   class="form-control" id="description" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="peso" class="form-label">Peso</label>
+            <input type="text" value="{{ produto.peso }}"
+                   class="form-control" id="peso" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="preco_venda" class="form-label">Preço venda</label>
+            <input type="text" value="R$ {{ produto.valor_venda }}"
+                   class="form-control" id="preco_venda" readonly required>
+          </div>
+        </div>
+        
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="altura" class="form-label">Altura</label>
+            <input type="text" value="{{ produto.altura }}"
+                   class="form-control" id="altura" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="categoria" class="form-label">Categoria</label>
+            <input type="text" value="{{ produto.id_categoria.nome }}"
+                   class="form-control" id="categoria" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="largura" class="form-label">Largura</label>
+            <input type="text" value="{{ produto.largura }}"
+                   class="form-control" id="largura" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="estante" class="form-label">Estante</label>
+            <input type="text" value="{{ produto.id_estante.codigo }}"
+                   class="form-control" id="estante" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="comprimento" class="form-label">Comprimento</label>
+            <input type="text" value="{{ produto.comprimento }}"
+                   class="form-control" id="comprimento" readonly required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="prateleira" class="form-label">N° prateleira</label>
+            <input type="text" value="{{ produto.num_prateleira }}"
+                   class="form-control" id="prateleira" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 32px;">
+          <div class="col-md-1">
+              <a href="/products/">
+            <button type="button" class="btn btn-secondary">Voltar</button>
+                  </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_edit_product' produto.id %}">
+            <button type="button" class="btn btn-info">Editar</button>
+                  </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_delete_product' produto.id %}">
+              <button type="button" class="btn btn-danger">Apagar</button>
+                    </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

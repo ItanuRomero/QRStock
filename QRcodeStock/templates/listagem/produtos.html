@@ -19,22 +19,31 @@
 
       <div class="col-md-4">
         <label for="categoria" class="form-label">Pesquisar por categoria</label>
-        <select class="form-select" id="categoria">
-          <option selected>Selecione uma categoria</option>
-          <option value="1">Categoria 01</option>
-          <option value="2">Categoria 02</option>
-          <option value="3">Categoria 03</option>
+        <select class="form-select" id="categoria" name="category-filter">
+          <option value="0" selected>Selecione uma categoria</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">Categoria {{ category.nome }}</option>
+            {% endfor %}
         </select>
       </div>
 
       <div class="col-md-4 d-flex align-items-end">
-        <button 
-          type="submit" 
-          class="btn btn-success" 
+        <button
+          type="submit"
+          class="btn btn-primary"
           id="pesquisar-produto"
         >
           Pesquisar
         </button>
+          &nbsp;
+          <a href="/add_product/">
+          <button
+                type="button"
+                class="btn btn-success"
+          >
+          Adicionar
+          </button>
+              </a>
       </div>
     </form>
 
@@ -65,9 +74,5 @@
       </table>
     </div>
   </div>
-
-  <script>
-    feather.replace()
-  </script>
 
 {% endblock %}

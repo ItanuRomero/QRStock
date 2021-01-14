@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+  
+  <div class="container-md" style="margin: 56px auto 32px; padding: 0 32px;">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Visualizando Estante {{ shelf.id }}</h1>
+      </div>
+    </div>
+    
+    <div class="row" style="margin-top: 12px;">
+      <form class="col-md-12">
+        <div class="row">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" value="{{ shelf.codigo }}" class="form-control" id="name" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="storage" class="form-label">Galpão</label>
+            <input type="text" value="{{ shelf.galpao }}" class="form-control" id="storage" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="hall" class="form-label">Corredor</label>
+            <input type="text" value="{{ shelf.corredor }}" class="form-control" id="hall" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 12px;">
+          <div class="col-md-4">
+            <label for="shelves" class="form-label">QTD. prateleiras</label>
+            <input type="number" value="{{ shelf.quantidade_prateleiras }}" class="form-control" id="shelves" readonly required>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 32px;">
+          <div class="col-md-1">
+              <a href="/shelves/">
+            <button type="button" class="btn btn-secondary">Voltar</button>
+              </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_edit_shelf' shelf.id %}">
+            <button type="button" class="btn btn-info">Editar</button>
+              </a>
+          </div>
+
+          <div class="col-md-1">
+              <a href="{% url 'url_delete_shelf' shelf.id %}">
+              <button type="button" class="btn btn-danger">Apagar</button>
+                    </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
