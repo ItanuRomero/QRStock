@@ -1,7 +1,7 @@
 asgiref==3.3.1
 dj-database-url==0.5.0
 dj-static==0.0.6
-Django==3.1.4
+Django==3.1.13
 django-bootstrap-form==3.4
 django-heroku==0.3.1
 django-qr-code==2.0.1
